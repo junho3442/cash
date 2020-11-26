@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.gdu.cash.mapper.NoticeMapper">
+  <!-- 일반 noticeList -->
+  <select id="selectNoticeList" resultType="kr.co.gdu.cash.vo.Notice">
+    SELECT 
+    	notice_id noticeId, 
+    	notice_title noticeTitle, 
+    	notice_date noticeDate
+    FROM notice 
+    ORDER BY notice_date DESC 
+    LIMIT 2
+  </select>
+  
+  <!-- 페이징 -->
+  <select id="selectNoticeListByPage" resultType="kr.co.gdu.cash.vo.Notice" parameterType="java.util.Map">
+  	select 
+	  	notice_id noticeId,
+	  	notice_title noticeTitle,
+	  	notice_date noticeDate
+  	from notice
+  	order by notice_date DESC
+  	limit #{beginRow},#{rowPerPage}
+  </select>
+  
+  <!-- 페이징(총 행 갯수) -->
+  <select id="totalCountNotice" resultType="int">
+  	select 
+  		count(*) count
+  	from notice
+  </select>
+  
+  <!-- 공지사항 자세히 보기 -->
+ 
+ <resultMap type="kr.co.gdu.cash.vo.Notice" id="selectNoticeOne">
+ 	<result property="noticeId" column="notice_id"/>
+ 	<result property="noticeTitle" column="notice_title"/>
+ 	<result property="noticeContent" column="notice_content"/>
+ 	<result property="noticeDate" column="notice_date"/>
+ 	
+ 	<collection property="noticefile" ofType="kr.co.gdu.cash.vo.Noticefile">
+ 		<result property="noticefileId" column="noticefile_id"/>
+ 		<result property="noticefileName" column="noticefile_name"/>
+ 		<result property="noticefileSize" column="noticefile_size"/>
+ 		<result property="noticefileType" column="noticefile_type"/>
+ 	</collection>
+ 	
+ 	<collection property="commentList" ofType="kr.co.gdu.cash.vo.Comment">
+ 		<result property="commentId" column="comment_id"/>
+ 		<result property="commentContent" column="comment_content"/>
+ 	</collection>
+ </resultMap>
+ 
+  <select id="selectNoticeOne" resultMap="selectNoticeOne" parameterType="int">
+  	select 
+	  	n.notice_id,
+	  	n.notice_title,
+	  	n.notice_content,
+	  	n.notice_date,
+	  	nf.noticefile_id,
+	  	nf.noticefile_name,
+	  	nf.noticefile_size,
+	  	nf.noticefile_Type,
+	  	c.comment_id,
+	  	c.comment_content
+  	from notice n left join noticefile nf
+  		 on n.notice_id = nf.notice_id
+  		 left join comment c
+  		 on n.notice_id = c.notice_id
+  	where n.notice_id = #{noticeId}
+  </select>
+  
+  <!-- 공지사항 추가 -->
+  <insert id="insertNotice" parameterType="kr.co.gdu.cash.vo.Notice">
+  	<selectKey resultType="int" keyProperty="noticeId" order="AFTER"> 
+  		SELECT LAST_INSERT_ID()
+  	</selectKey>
+	  	INSERT INTO notice(
+		  	notice_title,
+		  	notice_content,
+		  	notice_date
+		)VALUES(
+			#{noticeTitle},
+			#{noticeContent},
+			NOW()
+		)
+  </insert>
+  
+  <!-- 공지사항 삭제 -->
+  <delete id="deleteNotice" parameterType="int">
+  	DELETE FROM notice
+  	where notice_id=#{noticeId}
+  </delete>
+  
+  <!-- 공지사항 수정 -->
+  <update id="updateNotice" parameterType="kr.co.gdu.cash.vo.Notice">
+  	update notice
+  	set notice_title=#{noticeTitle},
+  		notice_content=#{noticeContent},
+  		notice_date = now()
+  	where notice_id = #{noticeId}	
+  </update>
+</mapper>
