@@ -34,10 +34,10 @@
 	<h1>로그인</h1>
 	<form action="${pageContext.request.contextPath}/login" method="post">
 		<div class="form-group">
-			ID: <input type="text" name="id" class="form-control">
+			ID: <input type="text" name="id" class="form-control" value="goodee">
 		</div>
 		<div class="form-group">
-			PW: <input type="password" name="pw" class="form-control">
+			PW: <input type="password" name="pw" class="form-control" value="1234">
 		</div>
 		<div>
 			<button type="submit">로그인</button>
