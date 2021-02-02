@@ -8,18 +8,20 @@
     SELECT 
     	notice_id noticeId, 
     	notice_title noticeTitle, 
-    	notice_date noticeDate
+    	notice_writer noticeWriter,
+    	DATE_FORMAT(notice_date,'%Y-%m-%d') noticeDate
     FROM notice 
     ORDER BY notice_date DESC 
-    LIMIT 2
+    LIMIT 3
   </select>
   
   <!-- 페이징 -->
   <select id="selectNoticeListByPage" resultType="kr.co.gdu.cash.vo.Notice" parameterType="java.util.Map">
   	select 
 	  	notice_id noticeId,
+	  	notice_writer noticeWriter,
 	  	notice_title noticeTitle,
-	  	notice_date noticeDate
+	  	DATE_FORMAT(notice_date,'%Y-%m-%d') noticeDate
   	from notice
   	order by notice_date DESC
   	limit #{beginRow},#{rowPerPage}
@@ -37,6 +39,7 @@
  <resultMap type="kr.co.gdu.cash.vo.Notice" id="selectNoticeOne">
  	<result property="noticeId" column="notice_id"/>
  	<result property="noticeTitle" column="notice_title"/>
+ 	<result property="noticeWriter" column="notice_writer"/>
  	<result property="noticeContent" column="notice_content"/>
  	<result property="noticeDate" column="notice_date"/>
  	
@@ -57,8 +60,9 @@
   	select 
 	  	n.notice_id,
 	  	n.notice_title,
+	  	n.notice_writer,
 	  	n.notice_content,
-	  	n.notice_date,
+	  	DATE_FORMAT(n.notice_date,'%Y-%m-%d') notice_date,
 	  	nf.noticefile_id,
 	  	nf.noticefile_name,
 	  	nf.noticefile_size,
@@ -80,10 +84,12 @@
 	  	INSERT INTO notice(
 		  	notice_title,
 		  	notice_content,
+		  	notice_writer,
 		  	notice_date
 		)VALUES(
 			#{noticeTitle},
 			#{noticeContent},
+			#{noticeWriter},
 			NOW()
 		)
   </insert>

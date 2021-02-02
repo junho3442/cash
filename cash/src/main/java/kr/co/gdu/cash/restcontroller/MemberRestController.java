@@ -15,7 +15,7 @@ public class MemberRestController {
 	@PostMapping("/admin/idCheck")
 	public String idCheck(@RequestParam(value="id")String id) {
 		String returnId = memberRestService.getMemberId(id);
-		
+		System.out.print(returnId);
 		if(returnId == null) {
 			return "yes"; // data값
 		}

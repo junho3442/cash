@@ -37,7 +37,7 @@ public class CashBookController {
 	public String cashbookList(Model model,
 			@PathVariable(name="currentPage",required=true)int currentPage) {
 		int totalCount = cashbookService.getTotalCountCashbook();
-		int rowPerPage = 20;
+		int rowPerPage = 10;
 		int lastPage = totalCount/rowPerPage;
 		if(totalCount%rowPerPage != 0 ) {
 			lastPage = lastPage+1;

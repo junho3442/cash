@@ -38,6 +38,7 @@
    		-(case when cashbook_kind = '지출' then cashbook_price ELSE 0 END)) AS "합계"
 	FROM cashbook
 	GROUP BY DATE_FORMAT(cashbook_date, '%Y.%m')
+	order by cashbook_date desc
 	LIMIT 3	
 	</select>
 	
@@ -101,8 +102,8 @@
 			cashbook_price cashbookPrice,
 			cashbook_content cashbookContent,
 			cashbook_date cashbookDate,
-			create_date createDate,
-			update_date updateDate
+			DATE_FORMAT(create_date,'%Y-%m-%d (%H:%i)') createDate,
+			DATE_FORMAT(update_date,'%Y-%m-%d (%H:%i)') updateDate
 		from cashbook
 		order by cashbook_date DESC, cashbook_id DESC
 		limit #{beginRow},#{rowPerPage}

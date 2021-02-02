@@ -4,6 +4,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	.card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	
+	.form-signin .form-control {
+  		position: relative;
+  		height: auto;
+  		-webkit-box-sizing: border-box;
+     	-moz-box-sizing: border-box;
+        	 box-sizing: border-box;
+  		padding: 10px;
+  		font-size: 16px;
+	}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -11,38 +29,45 @@
 </head>
 <body>
 	
-<div class="container" >
-	<h1>공지</h1>
+<div class="container">
+	<h1>공지사항</h1>
 	<div>
 		<table border="1" class="table table-bordered">
 			<thead>
 				<tr>
-					<th>notice_id</th>
-					<th>notice_title</th>
+					<th>작성자</th>
+					<th>제목</th>
+					<th>작성일</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="n" items="${noticeList}">
 					<tr>
-						<td>${n.noticeId }</td>
-						<td>${n.noticeTitle }</td>
+						<td>${n.noticeWriter}</td>
+						<td>${n.noticeTitle}</td>
+						<td>${n.noticeDate}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	<h1>로그인</h1>
+	<div class="card align-middle" style="width:20rem; border-radius:20px;">
+		<div class="card-title" style="margin-top:30px;">
+			<h2 class="card-title text-center" style="color:#113366;">로그인</h2>
+		</div>
+		<div class="card-body">
 	<form action="${pageContext.request.contextPath}/login" method="post">
-		<div class="form-group">
-			ID: <input type="text" name="id" class="form-control" value="goodee">
-		</div>
-		<div class="form-group">
-			PW: <input type="password" name="pw" class="form-control" value="1234">
-		</div>
-		<div>
-			<button type="submit">로그인</button>
+		 <h5 class="form-signin-heading">로그인 정보를 입력해주세요</h5>
+        <label for="inputEmail" class="sr-only">Your ID</label>
+        <input type="text" id="uid" class="form-control" name="id" value="goodee" required autofocus><br>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="upw" class="form-control" name="pw" value="1234" required><br>
+		<div style="text-align:right;">
+			<button type="submit" class="btn btn-primary">로그인</button>
 		</div>
 	</form>
+	</div>
+	</div>
 </div>
 	
 </body>

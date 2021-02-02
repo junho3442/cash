@@ -9,37 +9,36 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-	
-<div class="container" >
-	<jsp:include page="/WEB-INF/view/inc/menu.jsp"></jsp:include>
-
-	<div class="row">
-	<div class="col-sm-3"><h3>공지사항</h3></div>
-	<div class="col-sm-9">
-	<a href="${pageContext.request.contextPath}/admin/noticeList" type="button" class="btn btn-outline-dark">more</a>
-	</div>
-	</div>
-	<div>
-		<table border="1" class="table table-dark table-hover">
-			<thead>
-				<tr>
-					<th>notice_id</th>
-					<th>notice_title</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="n" items="${noticeList }">
-				
-					<tr>
-						<td>${n.noticeId }</td>
-						<td>${n.noticeTitle }</td>
+	<div class="container text-center">
+		<div style="text-align:center;">
+			<jsp:include page="/WEB-INF/view/inc/menu.jsp"></jsp:include>
+		</div>
+		<h2 style="margin-top:30px; margin-right: 280px;">안녕하세요 ${loginId}님</h2>
+			<h3 style="margin-top:50px;">[공지사항]</h3>
+		
+		<div>
+			<table border="1" style="margin-top:10px; width:50%; margin-left: auto; margin-right: auto;" class="table table-dark table-hover">
+				<thead>
+					<tr>				
+						<th style="width:20%;">작성일</th>
+						<th>제목</th>
 					</tr>
-				</c:forEach>	
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<c:forEach var="n" items="${noticeList }">
+						<tr>
+							<td>${n.noticeDate }</td>
+							<td>${n.noticeTitle }</td>
+						</tr>
+					</c:forEach>	
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<div>
-		<table border="1" class="table table-dark table-hover">
+	
+	<div class="container text-center">	
+		<h3 style="margin-top:50px;">[최근3개월 수입/지출내역]</h3>
+		<table border="1" style="margin-top:10px; width:70%; margin-left: auto; margin-right: auto;" class="table table-dark table-hover">
 			<thead>
 				<tr>
 					<th>날짜</th>
@@ -49,17 +48,16 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="io" items="${inOutList }">
+				<c:forEach var="io" items="${inOutList}">
 					<tr>
 						<td>${io["날짜"]}</td>
-						<td>${io["수입"]}</td>
-						<td>${io["지출"]}</td>
-						<td>${io["합계"]}</td>
+						<td>${io["수입"]}&nbsp;원</td>
+						<td>${io["지출"]}&nbsp;원</td>
+						<td>${io["합계"]}&nbsp;원</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-	</div>
-</div>	
+	</div>	
 </body>
 </html>

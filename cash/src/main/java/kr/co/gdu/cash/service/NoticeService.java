@@ -89,7 +89,7 @@ public class NoticeService {
 		notice.setNoticeTitle(noticeForm.getNoticeTitle());
 		notice.setNoticeContent(noticeForm.getNoticeContent());
 		notice.setNoticeDate(noticeForm.getNoticeDate());
-		
+		notice.setNoticeWriter(noticeForm.getNoticeWriter());
 		noticeMapper.insertNotice(notice);
 		
 		List<Noticefile> noticefile = null;

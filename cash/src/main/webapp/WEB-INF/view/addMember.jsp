@@ -12,7 +12,7 @@
 		$('#id').blur(function(){
 			//입력한 id값과 db에있는 아이디값을 비교
 			
-			if($('#id').val==''){
+			if($('#id').val()==''){
 				$('#id').focus();
 				return;
 				}

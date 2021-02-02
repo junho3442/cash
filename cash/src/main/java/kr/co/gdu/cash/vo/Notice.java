@@ -10,6 +10,7 @@ public class Notice {
 	private String noticeTitle;
 	private String noticeContent;
 	private String noticeDate;
+	private String noticeWriter;
 	private List<Noticefile> noticefile;
 	private List<Comment> commentList;
 }

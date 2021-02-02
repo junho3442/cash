@@ -9,20 +9,23 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/view/inc/menu.jsp"></jsp:include> 
-	<jsp:include page="/WEB-INF/view/inc/chartMenu.jsp"></jsp:include>
-	
-	<div>
-		<h1>카테고리별 수입차트</h1>
-	</div>
-	<div>
-		<span>연도를 입력해주세요:</span>
-		<input type="text" id="year">
-		<button type="button" id="yearCategory">입력</button>
-	</div>
-	
-	<div>
-		<canvas id="myChart"></canvas>
+	<div class="container text-center">
+		<jsp:include page="/WEB-INF/view/inc/menu.jsp"></jsp:include> 
+		<div style="margin-top:30px;">
+			<jsp:include page="/WEB-INF/view/inc/chartMenu.jsp"></jsp:include>
+		</div>
+		<div>
+			<h1>카테고리별 수입차트</h1>
+		</div>
+		<div>
+			<span>연도를 입력해주세요:</span>
+			<input type="text" id="year">
+			<button type="button" id="yearCategory" class="btn btn-outline-info">입력</button>
+		</div>
+		
+		<div>
+			<canvas id="myChart"></canvas>
+		</div>
 	</div>
 </body>
 <script>

@@ -9,9 +9,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
+<div class="container text-center">
 	<jsp:include page="/WEB-INF/view/inc/menu.jsp"></jsp:include>   
-	<jsp:include page="/WEB-INF/view/inc/chartMenu.jsp"></jsp:include>
-
+	<div style="margin-top:30px;">
+		<jsp:include page="/WEB-INF/view/inc/chartMenu.jsp"></jsp:include>
+	</div>
 	
 <div>
 <h1>월별 수입/지출 차트</h1>
@@ -23,11 +25,11 @@
 		
 		<div>
 			수입및 지출을 선택해 주세요:
-			<select id="cashbookKind">
+			<select id="cashbookKind" style="margin-top:10px;">
 				<option value="지출">지출</option>
 				<option value="수입">수입</option>
 			</select>
-			<button type="button" id="sub">입력</button>
+			<button type="button" class="btn btn-outline-info" id="sub">입력</button>
 		</div>
 		
 		
@@ -41,7 +43,8 @@
 	</div>
 	
 	
-	
+	</div>
+</body>	
 <script>
 $('#sub').click(function(){
 	$.ajax({
@@ -116,5 +119,4 @@ $('#sub').click(function(){
 });
 </script>	
 		
-</body>
 </html>

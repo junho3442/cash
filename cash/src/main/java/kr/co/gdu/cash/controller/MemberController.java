@@ -23,6 +23,6 @@ public class MemberController {
 	@PostMapping("/admin/addMember")
 	public String addMember(Member member) {
 		memberService.getAddMember(member);
-		return "/redirect:index"; //memberList.jsp
+		return "redirect:/";
 	}
 }

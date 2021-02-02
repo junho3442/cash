@@ -7,11 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+<div class="container text-center">
+		<div class="text-center">
 			<jsp:include page="/WEB-INF/view/inc/menu.jsp"></jsp:include>
-		   
+		</div>  
+		   <div style="margin-top:30px;" class="text-center">
 			<jsp:include page="/WEB-INF/view/inc/chartMenu.jsp"></jsp:include>
-		
+			</div>
 	<!-- 차트 -->
 	
 	<h1>연도별 수입/지출 차트</h1>
@@ -20,7 +22,7 @@
 			<option value="지출">지출</option>
 			<option value="수입">수입</option>
 		</select>
-		<button type="button" id="cashbookCategory">입력</button>
+		<button type="button" class="btn btn-outline-info" id="cashbookCategory">입력</button>
 	</div>
 		
 		
@@ -33,6 +35,7 @@
 	<div>
 		<canvas id="pieChart"></canvas>
 	</div>
+</div>	
 </body>	
 	<!-- 테이블 -->
 	
@@ -46,7 +49,7 @@ $('#cashbookCategory').click(function(){
 		type:'get',
 		success: function(data){		
 			let html=`
-				<table border="1">	
+				<table border="1" style="margin-top:10px;">	
 					<thead>	
 						<tr>
 							<th>\${data.내역}</th>

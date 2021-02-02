@@ -6,28 +6,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+<div class="container text-center">
 	<jsp:include page="/WEB-INF/view/inc/menu.jsp"></jsp:include>
-	<h1>cashbookList</h1>
-		<table border="1">
+	<h1 style="margin-top:30px;">가계부 전체 내역</h1>
+		<table class="table table-striped" style="margin-top:20px; width:100%; margin-left: auto; margin-right: auto;">
 			<thead>
 				<tr>
-					<th>cashbook_id</th>
-					<th>cashbook_kind</th>
-					<th>category_name</th>
-					<th>cashbook_price</th>
-					<th>cashbook_content</th>
-					<th>cashbook_date</th>
-					<th>create_date</th>
-					<th>update_date</th>
+					<th>수입/지출</th>
+					<th>사용 카테고리</th>
+					<th>금액</th>
+					<th>내용</th>
+					<th>수입/지출 발생일</th>
+					<th>가계부 작성일</th>
+					<th>가계부 수정일</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="c" items="${cashbookList}">
 					<tr>
-						<td>${c.cashbookId }</td>
-						<td>${c.cashbookKind }</td>
+						<td style="font-weight:bold;">${c.cashbookKind }</td>
 						<td>${c.categoryName }</td>
 						<td>${c.cashbookPrice }</td>
 						<td>${c.cashbookContent }</td>
@@ -39,10 +39,13 @@
 			</tbody>
 		</table>
 			<div>
-				<c:if test="${currentPage<lastPage && currentPage > 0 }">
-					<a href="${pageContext.request.contextPath}/admin/cashbookList/${currentPage+1}">다음</a>
+				<c:if test="${currentPage > 1}">
 					<a href="${pageContext.request.contextPath}/admin/cashbookList/${currentPage-1}">이전</a>
 				</c:if>
+				<c:if test="${currentPage<lastPage}">
+					<a href="${pageContext.request.contextPath}/admin/cashbookList/${currentPage+1}">다음</a>
+				</c:if>
 			</div>
+		</div>	
 </body>
 </html>

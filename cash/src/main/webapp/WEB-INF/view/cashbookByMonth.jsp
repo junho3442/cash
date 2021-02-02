@@ -6,35 +6,23 @@
 <meta charset="EUC-KR">
 <title>Index</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="container text-center">
 	<jsp:include page="/WEB-INF/view/inc/menu.jsp"></jsp:include>
-	<h3>공지사항</h3>
-	<table border="1" class="table table-dark table-hover">
-		<thead>
-			<tr>
-				<th>notice_id</th>
-				<th>notice_title</th>
-				<th>notice_date</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="notice" items="${notice}">
-				<tr>
-					<td>${notice.noticeId}</td>
-					<td>${notice.noticeTitle}</td>
-					<td>${notice.noticeDate}</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+	
+	<h1 style="margin-top:30px;">월별 가계부</h1>
 	<!-- 다이어리 -->
-	<div>
-		<p class="bg-success text-white">이번달 수입 합계 :${sumIn }</p>
-	</div>
-	<div>
-		<p class="bg-danger text-white">이번달 지출 합계 :${sumOut}</p>
+	<div class="row" style="margin-top:100px;">
+	<div class="border border-0 d-flex" style="margin-left: 115px;">	
+		<div class="col-md-6">
+			<p style="width:150%; white-space:nowrap;" class="bg-success text-white border">이번달 수입 <br/>${sumIn }원</p>
+		</div>
+		<div class="col-md-6">
+			<p style="width:150%; white-space:nowrap;" class="bg-danger text-white border">이번달 지출 <br/>${sumOut}원</p>
+		</div>
+	</div>	
 	</div>
 	
 	<h3>
@@ -44,7 +32,7 @@
 	</h3>
 	
 	<div>
-		<table border="1" width="100%" >
+		<table border="1" style="table-layout:fixed; width:80%; text-align:center; margin-left: auto; margin-right: auto;">
 			<thead>
 				<tr>
 					<th class="sunday">일</th>
@@ -57,23 +45,23 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				<tr height="30">
 					<c:forEach var="i" begin="1" end="${lastDay+(firstDayOfWeek-1)}" step="1">
 						<c:if test="${i-(firstDayOfWeek-1) < 1}">
 							<td>&nbsp;</td>
 						</c:if>
 						<c:if test="${i-(firstDayOfWeek-1) > 0}">
-							<td>
+							<td style="word-break:break-all;">
 								<div>
 									<a href="${pageContext.request.contextPath}/admin/cashbookByDay/now/${currentYear}/${currentMonth}/${i-(firstDayOfWeek-1)}">${i-(firstDayOfWeek-1)}</a>
 								</div> 
 								<c:forEach var="c" items="${cashList}">
 									<c:if test="${i-(firstDayOfWeek-1)==c.dday}">
 										<c:if test="${c.cashbookKind=='수입' }">
-											<div>수입: ${c.cashPrice}</div>
+											<div style="white-space:nowrap;" class="bg-success text-white border">수입: ${c.cashPrice}원</div>
 										</c:if>
 										<c:if test="${c.cashbookKind=='지출' }">
-											<div>지출: ${c.cashPrice }</div>
+											<div style="white-space:nowrap;" class="bg-danger text-white border">지출: ${c.cashPrice }원</div>
 										</c:if>
 									</c:if>
 								</c:forEach>
@@ -92,6 +80,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<p style="font-weight:bold;">(날짜(숫자)클릭시 수입/지출 내용을 입력및 수정/삭제 할 수 있습니다)</p>
 	</div>
 </div>		
 </body>
